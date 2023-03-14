@@ -102,6 +102,21 @@ function App() {
       });
   };
 
+  const getToday = () => {
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDate();
+    var dateString =
+      (day < 10 ? "0" : "") +
+      day +
+      (month < 10 ? "0" : "") +
+      month +
+      year.toString().slice(2, 4);
+
+    return dateString;
+  };
+
   return (
     <div className="App">
       <SearchDate
@@ -131,7 +146,9 @@ function App() {
             expenses={osExpenses}
             setExpenses={setOsExpenses}
           />
-          <button onClick={handleSubmit}> Submit</button>
+          {getToday() === shift.slice(0, 6) && (
+            <button onClick={handleSubmit}> Submit</button>
+          )}
         </>
       )}
       {isDisplay ? <Modal /> : ""}
@@ -140,3 +157,4 @@ function App() {
 }
 
 export default App;
+

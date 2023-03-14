@@ -1,0 +1,50 @@
+.App {
+  font-family: popping, sans-serif;
+  text-align: center;
+}
+
+input,
+select,
+option {
+  font-family: popping, sans-serif;
+  font-size: 15px;
+}
+
+.expense input {
+  width: 60px;
+}
+
+.expense {
+  padding: 5px 0px;
+  display: flex;
+  gap: 5px;
+}
+
+.input-group {
+  margin: 20px;
+  border: 1px solid #dddddd;
+  padding: 10px;
+}
+
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ddd;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  margin: 5px 0px 20px;
+}

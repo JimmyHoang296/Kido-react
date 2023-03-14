@@ -23,20 +23,22 @@ function getTextDate(date) {
   return `${day}${month}${year}`;
 }
 
-const SearchDate = ({ onSearch, dayShift, setDayShift }) => {
+const SearchDate = ({ onSearch }) => {
   const [day, setDay] = useState(getToday());
   const [shift, setShift] = useState("c1");
+  const [dayShift, setDayShift] = useState(getTextDate(day) + shift);
 
   const handleDayChange = (event) => {
     let value = event.target.value;
     setDay(value);
+    setDayShift(getTextDate(value) + shift);
   };
 
   const handleShiftChange = (event) => {
     let value = event.target.value;
     setShift(value);
+    setDayShift(getTextDate(day) + value);
   };
-  setDayShift(getTextDate(day) + shift);
 
   return (
     <div>

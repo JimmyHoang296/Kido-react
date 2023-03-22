@@ -30,7 +30,7 @@ function App() {
   );
 
   const URL =
-    "https://script.google.com/macros/s/AKfycbwnJAcORheHiPMlupOED5DlDjtzL6x7BmZFZ7nBqwKcJLp4Gsh9VLIIXaf5lXXIDRdq/exec";
+    "https://script.google.com/macros/s/AKfycbwyMLrj0ajMuiREt3s06TFOr5-raaIQJfPh7QbRPFmhPTuhq0xUoXhQ-EvhhP5zZ71yvg/exec";
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent the form from submitting

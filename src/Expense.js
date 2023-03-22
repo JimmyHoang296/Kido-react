@@ -36,8 +36,7 @@ function Expense({ expenseList, expenseValue, handleChange }) {
     let inputName = event.target.name;
     let value = event.target.value;
     let newTotal = expense.total;
-
-    if (isNaN(value) && inputName !== "note") {
+    if (isNaN(value) && inputName !== "note" && inputName !== "source") {
       return;
     }
     if (inputName === "price") {
@@ -51,6 +50,9 @@ function Expense({ expenseList, expenseValue, handleChange }) {
     handleChange(updatedExpense);
   };
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   return (
     <div className="expense" key={expense.id} id={expense.id}>
       <Select
@@ -89,7 +91,7 @@ function Expense({ expenseList, expenseValue, handleChange }) {
       <input
         type="text"
         name="total"
-        value={expense.total}
+        value={numberWithCommas(expense.total)}
         placeholder="tổng"
         disabled
       />

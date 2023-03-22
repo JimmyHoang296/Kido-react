@@ -5,18 +5,32 @@ import SearchDate from "./SearchDate";
 import Modal from "./Modal";
 import DrExpenses from "./DrExpenses";
 import OsExpenses from "./OsExpenses";
+import CashInput from "./CashInput";
 
 function App() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const [isMainDisplay, setIsMainDisplay] = useState(false);
+  const [isMainDisplay, setIsMainDisplay] = useState(true);
   const [shift, setShift] = useState("");
+  const cashList = [
+    { id: "cashStart", name: "Tiền đầu ca" },
+    { id: "cashSale", name: "Doanh thu bán hàng" },
+    { id: "grab", name: "Doanh thu Grab" },
+    { id: "baemin", name: "Doanh thu Baemin" },
+    { id: "shopee", name: "Doanh thu Shopee" },
+    { id: "cashBank", name: "Tiền ngân hàng" },
+    { id: "cashEnd", name: "Tiền cuối ca" }
+  ];
 
   const [drExpenses, setDrExpenses] = useState([]);
   const [osExpenses, setOsExpenses] = useState([]);
   const [drList, setDrList] = useState([]);
   const [osList, setOsList] = useState([]);
+  const [cashs, setCashs] = useState(
+    cashList.reduce((a, v) => ({ ...a, [v.id]: "" }), {})
+  );
+
   const URL =
-    "https://script.google.com/macros/s/AKfycbwr34Xy9OOF7UxZVDxSTNlSrTGVKvmOauX1h02qzkhLtVn7QqwEEDbslwar7gBq1rUiVg/exec";
+    "https://script.google.com/macros/s/AKfycbwfUBnuqDSOSY_LIWNjTL0nNqQkBBiVN1UBcEJoy429IhvFOCAd_07noTaJL-a30NOr/exec";
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent the form from submitting
@@ -26,10 +40,9 @@ function App() {
       id: shift,
       // sale: [{}],
       dr: drExpenses,
-      os: osExpenses
-      // cash: [{}]
+      os: osExpenses,
+      cash: cashs
     };
-    console.log(JSON.stringify(submitData));
     setIsDisplay(true);
     fetch(URL, {
       method: "POST",
@@ -54,7 +67,6 @@ function App() {
   };
 
   const handleResponse = (data) => {
-    console.log("handleresponse", data);
     setDrList(data.setUp.expenseList.filter((ex) => ex.type === "Trong ca"));
     setOsList(data.setUp.expenseList.filter((ex) => ex.type === "Ngoài ca"));
     setDrExpenses(
@@ -73,11 +85,12 @@ function App() {
     setShift(dayShift);
     setDrExpenses([]);
     setOsExpenses([]);
+    setCashs(cashList.reduce((a, v) => ({ ...a, [v.id]: "" }), {}));
     var submitData = {
       type: "search",
       id: dayShift
     };
-    console.log(JSON.stringify(submitData));
+    // console.log(JSON.stringify(submitData));
 
     setIsDisplay(true);
     fetch(URL, {
@@ -127,7 +140,7 @@ function App() {
       {isMainDisplay && (
         <>
           <h2>
-            Nhập chi phí ngày
+            Nhập chi phí {shift.slice(6, 8) === "c1" ? "ca 1" : "ca 2"} ngày
             {` ${shift.slice(0, 2)}/${shift.slice(2, 4)}/20${shift.slice(
               4,
               6
@@ -146,15 +159,15 @@ function App() {
             expenses={osExpenses}
             setExpenses={setOsExpenses}
           />
+          <CashInput cashList={cashList} cashs={cashs} setCashs={setCashs} />
           {getToday() === shift.slice(0, 6) && (
             <button onClick={handleSubmit}> Submit</button>
           )}
         </>
       )}
-      {isDisplay ? <Modal /> : ""}
+      {isDisplay ?? <Modal />}
     </div>
   );
 }
 
 export default App;
-

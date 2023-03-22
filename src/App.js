@@ -9,7 +9,7 @@ import CashInput from "./CashInput";
 
 function App() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const [isMainDisplay, setIsMainDisplay] = useState(true);
+  const [isMainDisplay, setIsMainDisplay] = useState(false);
   const [shift, setShift] = useState("");
   const cashList = [
     { id: "cashStart", name: "Tiền đầu ca" },

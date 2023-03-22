@@ -20,12 +20,16 @@ function DrExpenses({ expenseList, shift, expenses, setExpenses }) {
       unit: "",
       price: "",
       qty: "",
+      source: "cash",
       total: "",
       note: ""
     };
     setExpenses((prev) => [...prev, newEx]);
   };
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const handleChange = (expense) => {
     let updatedExpenses = expenses.map((ex) => {
       if (ex.id === expense.id) {
@@ -39,6 +43,26 @@ function DrExpenses({ expenseList, shift, expenses, setExpenses }) {
   return (
     <div className="input-group expense-list">
       <h2>Chi trong ca </h2>
+      <h3>
+        Tiền mặt{" "}
+        {numberWithCommas(
+          expenses.reduce(
+            (a, v) => (v.source === "cash" ? a + v.total * 1 : a),
+            0
+          )
+        )}
+        đ
+      </h3>
+      <h3>
+        Tiền ngân hàng{" "}
+        {numberWithCommas(
+          expenses.reduce(
+            (a, v) => (v.source === "bank" ? a + v.total * 1 : a),
+            0
+          )
+        )}
+        đ
+      </h3>
       <button onClick={addExpense}>Thêm chi phí</button>
       {expenses && expenses.length > 0
         ? expenses.map((ex, index) => (

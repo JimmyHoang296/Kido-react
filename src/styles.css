@@ -1,6 +1,14 @@
 .App {
   font-family: popping, sans-serif;
   text-align: center;
+  margin: 30px auto;
+}
+
+.search-group {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 input,
@@ -11,7 +19,8 @@ option {
 }
 
 .expense input {
-  width: 60px;
+  width: 80px;
+  text-align: right;
 }
 
 .expense {
@@ -24,8 +33,18 @@ option {
   margin: 20px;
   border: 1px solid #dddddd;
   padding: 10px;
+  text-align: left;
 }
 
+.input-group h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
+}
+.input-group h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
 .expense-list {
   display: flex;
   flex-direction: column;
@@ -47,4 +66,12 @@ option {
 
 h2 {
   margin: 5px 0px 20px;
+}
+
+.cash-input {
+  margin: 5px 0px;
+}
+.cash-input label {
+  display: inline-block;
+  width: 150px;
 }

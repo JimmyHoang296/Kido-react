@@ -69,6 +69,7 @@ function App() {
   const handleResponse = (data) => {
     setDrList(data.setUp.expenseList.filter((ex) => ex.type === "Trong ca"));
     setOsList(data.setUp.expenseList.filter((ex) => ex.type === "Ngoài ca"));
+    setCashs(data.cash)
     setDrExpenses(
       !data.dayData.dayExpense.length
         ? []
